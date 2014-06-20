@@ -20,7 +20,7 @@ public class City extends Model implements BasicModel<Long> {
 	private String name;
 	
 	@Basic
-	@Reguired
+	@Required
 	private int size;
 
 	public Long getKey() {
