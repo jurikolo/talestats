@@ -1,4 +1,4 @@
-talestats
-=========
+play2-crud-activator
+====================
 
-Gathers statistics for the-tale.org game
+[Typesafe Activator](http://typesafe.com/activator) for [play2-crud](https://github.com/hakandilek/play2-crud). 
