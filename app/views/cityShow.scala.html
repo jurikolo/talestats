@@ -1,0 +1,12 @@
+@(city: City)
+@import helper._ 
+@import helper.twitterBootstrap._
+
+@main("show") {
+
+     <dl class="dl-horizontal">
+         <dt>City</dt>
+         <dd>@city.getName()</dd>
+     </dl>
+    
+}

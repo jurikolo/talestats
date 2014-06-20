@@ -1,0 +1,17 @@
+@(key: Long, cityForm: Form[City])
+@import helper._ 
+@import helper.twitterBootstrap._
+
+@main(if(key != null) "update city" else "new city") {
+        
+	<h3>@if(key != null) { update city } else { new city } </h3>
+
+    @form(if(key != null) { play.utils.crud.routes.RouterCrudController.update("City", cityForm.get().getKey() + "") } 
+          else            { play.utils.crud.routes.RouterCrudController.create("City") }) { 
+        
+        @inputText(cityForm("name"), args = '_label -> "name")
+        <div>
+           <input type="submit" class="btn btn-success" value="@if(key != null) { Update } else { Create }">
+        </div>
+    }
+}
