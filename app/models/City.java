@@ -49,6 +49,6 @@ public class City extends Model implements BasicModel<Long> {
 
 	@Override
 	public String toString() {
-		return "Sample [key=" + key + ", name=" + name + "]";
+		return "City [key=" + key + ", name=" + name + "]";
 	}
 }

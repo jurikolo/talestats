@@ -11,7 +11,7 @@ import models.dao.CityDAO;
 import play.mvc.Result;
 import play.utils.crud.APIController;
 
-public class CityRestController extends APIController<Long, Sample> {
+public class CityRestController extends APIController<Long, City> {
 
 	@Inject
 	public CityRestController(CityDAO dao) {

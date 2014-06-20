@@ -5,7 +5,7 @@ import java.util.Random;
 import models.City;
 import play.utils.dao.DAOListener;
 
-public class CityDAOListener implements DAOListener<Long, Sample> {
+public class CityDAOListener implements DAOListener<Long, City> {
 
 	Random random = new Random();
 	
