@@ -12,12 +12,12 @@ public class CityDAOListener implements DAOListener<Long, City> {
 
 	@Override
 	public void beforeCreate(City m) {
-		m.setRandomValue(random.nextInt());
+		m.setSize(random.nextInt());
 	}
 
 	@Override
 	public void beforeUpdate(City m) {
-		m.setRandomValue(random.nextInt());
+		m.setSize(random.nextInt());
 	}
 
 	@Override

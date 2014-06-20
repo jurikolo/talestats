@@ -11,7 +11,13 @@ create table sample (
 
 create sequence sample_seq;
 
+create table city (
+  key                       bigint not null,
+  name                      varchar(255),
+  constraint pk_sample primary key (key))
+;
 
+create sequence city_seq;
 
 
 # --- !Downs

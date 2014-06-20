@@ -39,11 +39,11 @@ public class City extends Model implements BasicModel<Long> {
 		this.name = name;
 	}
 
-	public int getsize() {
+	public int getSize() {
 		return size;
 	}
 
-	public void setsize(int size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 
