@@ -26,6 +26,18 @@ public class Global extends GlobalSettings {
 				.scheduler()
 				.schedule(delay, frequency, showTime,
 						Akka.system().dispatcher());
+		
+		//Another example
+		Akka.system().scheduler().schedule(
+                Duration.create(0, TimeUnit.SECONDS),
+                Duration.create(5, TimeUnit.SECONDS),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("Hello2");
+                    }
+                },
+                Akka.system().dispatcher()
 	}
 
 }
