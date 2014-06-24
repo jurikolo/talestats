@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import controllers.Secured;
+import scala.concurrent.duration.Duration;
+
+
 public class Global extends GlobalSettings {
 	@Override
 	public void onStart(Application app) {
