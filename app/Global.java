@@ -38,6 +38,7 @@ public class Global extends GlobalSettings {
                     }
                 },
                 Akka.system().dispatcher()
+		);
 	}
 
 }
