@@ -45,7 +45,6 @@ public class Global extends GlobalSettings {
 
 		manager = new CRUDManager(this);
 		manager.initialize(app);
-
 	}
 
 	private Runnable cronProcess() {
@@ -56,10 +55,11 @@ public class Global extends GlobalSettings {
 				for (int cnt = 1; cnt < 2; cnt++) {
 					String url = "http://the-tale.org/game/map/places/"+cnt;
 					try {
-						doc = Jsoup.connect(url).get();
+						doc = Jsoup.parse(Jsoup.connect(url).get().toString(), "UTF-8");
 						//TODO разобраться с этой дрянью
-						Element size = doc.select("Размер города").last();
-						System.out.println(size);
+						String description = doc.select("meta[name=description]").get(0).attr("content");
+						System.out.println("Meta description : " + description);
+						//System.out.println(size);
 					}
 					catch (IOException e) {
 						e.printStackTrace();
