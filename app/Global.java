@@ -1,48 +1,74 @@
 import play.Application;
 import play.GlobalSettings;
 import play.libs.Akka;
+import play.utils.crud.CRUDManager;
+import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import controllers.Secured;
-import scala.concurrent.duration.Duration;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Global extends GlobalSettings {
+
+	private CRUDManager manager;
+
+	@Override
+	public <A> A getControllerInstance(Class<A> type) throws Exception {
+		A crudController = manager.getController(type);
+		if (crudController != null)
+			return crudController;
+		return super.getControllerInstance(type);
+	}
+
 	@Override
 	public void onStart(Application app) {
 		// Magic goes here
 		FiniteDuration delay = FiniteDuration.create(0, TimeUnit.SECONDS);
-		FiniteDuration frequency = FiniteDuration.create(5, TimeUnit.SECONDS);
-		Runnable showTime = new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Time is now: " + new Date());
-			}
-		};
+		FiniteDuration frequency = FiniteDuration.create(20, TimeUnit.SECONDS);
+		Runnable showTime = cronProcess();
 
 		Akka.system()
 				.scheduler()
 				.schedule(delay, frequency, showTime,
 						Akka.system().dispatcher());
-		
-		//Another example
-		Akka.system().scheduler().schedule(
-                Duration.create(0, TimeUnit.SECONDS),
-                Duration.create(5, TimeUnit.SECONDS),
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("Hello2");
-                    }
-                },
-                Akka.system().dispatcher()
-		);
+
+		super.onStart(app);
+
+		manager = new CRUDManager(this);
+		manager.initialize(app);
+
+	}
+
+	private Runnable cronProcess() {
+		Runnable getPage = new Runnable() {
+			@Override
+			public void run() {
+				Document doc;
+				for (int cnt = 1; cnt < 2; cnt++) {
+					String url = "http://the-tale.org/game/map/places/"+cnt;
+					try {
+						doc = Jsoup.connect(url).get();
+						//TODO разобраться с этой дрянью
+						Element size = doc.select("Размер города").last();
+						System.out.println(size);
+					}
+					catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		};
+		return getPage;
 	}
 
 }
