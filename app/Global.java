@@ -56,10 +56,18 @@ public class Global extends GlobalSettings {
 					String url = "http://the-tale.org/game/map/places/"+cnt;
 					try {
 						doc = Jsoup.parse(Jsoup.connect(url).get().toString(), "UTF-8");
-						//TODO разобраться с этой дрянью
-						String description = doc.select("meta[name=description]").get(0).attr("content");
-						System.out.println("Meta description : " + description);
-						//System.out.println(size);
+						String str = Jsoup.connect(url).get().toString();
+						//TODO refactor code to parse city size in a separate method
+						int size = 0;
+						if ((str.substring(str.indexOf("Размер города")+15, str.indexOf("Размер города")+16).matches("[0-9]")) && (str.substring(str.indexOf("Размер города")+16, str.indexOf("Размер города")+17).matches("[0-9]")))
+						{
+							size = Integer.parseInt(str.substring(str.indexOf("Размер города")+15, str.indexOf("Размер города")+17));
+						}
+						else
+						{
+							size = Integer.parseInt(str.substring(str.indexOf("Размер города")+15, str.indexOf("Размер города")+16));
+						}
+						System.out.println(size);
 					}
 					catch (IOException e) {
 						e.printStackTrace();
