@@ -13,7 +13,7 @@ public class CityController extends CRUDController<Integer, City> {
 	
 	@Inject
 	public CityController(CityDAO dao) {
-		super(dao, form(City.class), Integer.class, City.class, 10, "name");
+		super(dao, form(City.class), Integer.class, City.class, 999, "name");
 	}
 
 	@Override
