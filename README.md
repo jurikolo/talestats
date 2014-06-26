@@ -1,4 +1,4 @@
-play2-crud-activator
+The tale stats
 ====================
 
-[Typesafe Activator](http://typesafe.com/activator) for [play2-crud](https://github.com/hakandilek/play2-crud). 
+This project extracts some data from the-tale.org and presents it in a view for quick analysis. 
