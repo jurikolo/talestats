@@ -2,7 +2,6 @@ import play.Application;
 import play.GlobalSettings;
 import play.libs.Akka;
 import play.utils.crud.CRUDManager;
-import play.utils.dao.EntityNotFoundException;
 import scala.concurrent.duration.FiniteDuration;
 
 import java.io.IOException;
@@ -34,8 +33,8 @@ public class Global extends GlobalSettings {
 	@Override
 	public void onStart(Application app) {
 		// Magic goes here
-		FiniteDuration delay = FiniteDuration.create(0, TimeUnit.SECONDS);
-		FiniteDuration frequency = FiniteDuration.create(20, TimeUnit.SECONDS);
+		FiniteDuration delay = FiniteDuration.create(0, TimeUnit.HOURS);
+		FiniteDuration frequency = FiniteDuration.create(1, TimeUnit.HOURS);
 		Runnable showTime = cronProcess();
 
 		Akka.system()
