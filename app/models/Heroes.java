@@ -20,16 +20,16 @@ public class Heroes extends Model implements BasicModel<Long> {
 	private String name;
 	
 	@Basic
-	@Required
 	private int guildId;
 	
 	@Basic
-	@Required
 	private int ally;
 	
 	@Basic
-	@Required
 	private int enemy;
+	
+	@Basic
+	private String town;
 
 	public Long getKey() {
 		return key;
@@ -69,6 +69,14 @@ public class Heroes extends Model implements BasicModel<Long> {
 
 	public void setEnemy(int enemy) {
 		this.enemy = enemy;
+	}
+	
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
 	}
 
 	@Override
