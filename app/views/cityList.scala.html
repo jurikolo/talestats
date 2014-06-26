@@ -17,13 +17,17 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
+            	<th class="header">id</th>
                 <th class="header">name</th>
-                <th class="header">random value</th>
+                <th class="header">size</th>
             </tr>
         </thead>
         <tbody>
         @for(city <- page.getList()) {
             <tr>
+            	<td>
+                	@city.getKey()
+               	</td>
                 <td>
                 	@city.getName()
                	</td>

@@ -9,11 +9,11 @@ import models.dao.CityDAO;
 import play.mvc.Call;
 import play.utils.crud.CRUDController;
 
-public class CityController extends CRUDController<Long, City> {
+public class CityController extends CRUDController<Integer, City> {
 	
 	@Inject
 	public CityController(CityDAO dao) {
-		super(dao, form(City.class), Long.class, City.class, 10, "name");
+		super(dao, form(City.class), Integer.class, City.class, 10, "name");
 	}
 
 	@Override

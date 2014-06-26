@@ -2,25 +2,27 @@ import play.Application;
 import play.GlobalSettings;
 import play.libs.Akka;
 import play.utils.crud.CRUDManager;
-import scala.concurrent.duration.Duration;
+import play.utils.dao.EntityNotFoundException;
 import scala.concurrent.duration.FiniteDuration;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import models.City;
+import models.dao.CityDAO;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
+import utils.CityExtract;
+import utils.TaleStatConstants;
 
 public class Global extends GlobalSettings {
 
 	private CRUDManager manager;
-
+	private CityExtract cityExtract;
+	private CityDAO cityDao;
+	
 	@Override
 	public <A> A getControllerInstance(Class<A> type) throws Exception {
 		A crudController = manager.getController(type);
@@ -43,6 +45,8 @@ public class Global extends GlobalSettings {
 
 		super.onStart(app);
 
+		cityExtract = new CityExtract();
+		cityDao = new CityDAO();
 		manager = new CRUDManager(this);
 		manager.initialize(app);
 	}
@@ -52,31 +56,27 @@ public class Global extends GlobalSettings {
 			@Override
 			public void run() {
 				Document doc;
-				for (int cnt = 1; cnt < 2; cnt++) {
-					String url = "http://the-tale.org/game/map/places/"+cnt;
+				for (int cityId = 1; cityId <= TaleStatConstants.CITY_COUNT; cityId++) {
+					String url = "http://the-tale.org/game/map/places/"+cityId;
 					try {
 						doc = Jsoup.parse(Jsoup.connect(url).get().toString(), "UTF-8");
 						String str = Jsoup.connect(url).get().toString();
-						//TODO refactor code to parse city size in a separate method
-						int size = 0;
-						if ((str.substring(str.indexOf("Размер города")+15, str.indexOf("Размер города")+16).matches("[0-9]")) && (str.substring(str.indexOf("Размер города")+16, str.indexOf("Размер города")+17).matches("[0-9]")))
-						{
-							size = Integer.parseInt(str.substring(str.indexOf("Размер города")+15, str.indexOf("Размер города")+17));
-						}
-						else
-						{
-							size = Integer.parseInt(str.substring(str.indexOf("Размер города")+15, str.indexOf("Размер города")+16));
-						}
-						System.out.println(size);
+						
+						//Add or update city information
+						Integer size = cityExtract.getSize(str);
+						String cityName = cityExtract.getCityName(doc);
+						City city = new City();
+						city.setName(cityName);
+						city.setSize(size);
+						city.setKey(cityId);
+						cityDao.saveOrUpdate(city);
 					}
 					catch (IOException e) {
 						e.printStackTrace();
 					}
-					
 				}
 			}
 		};
 		return getPage;
 	}
-
 }

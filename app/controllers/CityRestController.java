@@ -11,11 +11,11 @@ import models.dao.CityDAO;
 import play.mvc.Result;
 import play.utils.crud.APIController;
 
-public class CityRestController extends APIController<Long, City> {
+public class CityRestController extends APIController<Integer, City> {
 
 	@Inject
 	public CityRestController(CityDAO dao) {
-		super(dao, Long.class, City.class);
+		super(dao, Integer.class, City.class);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class CityRestController extends APIController<Long, City> {
 		City m = new City();
 		m.setName(name);
 		
-		Long key = dao.create(m);
+		Integer key = dao.create(m);
 		if (log.isDebugEnabled())
 			log.debug("key : " + key);
 
