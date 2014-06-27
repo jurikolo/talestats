@@ -25,5 +25,4 @@ public class CityDAO extends BasicDAO<Integer, City> {
 			update(city);
 		}
 	}
-
 }
