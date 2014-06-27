@@ -30,6 +30,9 @@ public class Council extends Model implements BasicModel<Integer> {
 	private String race;
 	
 	@Basic
+	private String skill;
+	
+	@Basic
 	private Integer allies;
 	
 	@Basic
@@ -73,6 +76,14 @@ public class Council extends Model implements BasicModel<Integer> {
 
 	public void setRace(String race) {
 		this.race = race;
+	}
+	
+		public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
 	}
 
 	public Integer getAllies() {
