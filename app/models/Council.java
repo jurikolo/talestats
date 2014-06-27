@@ -17,26 +17,22 @@ public class Council extends Model implements BasicModel<Integer> {
 
 	@Basic
 	@Required
-	private String cityId;
+	private Integer cityId;
 
 	@Basic
 	@Required
 	private String name;
 
 	@Basic
-	@Required
 	private String job;
 	
 	@Basic
-	@Required
 	private String race;
 	
 	@Basic
-	@Required
 	private Integer allies;
 	
 	@Basic
-	@Required
 	private Integer enemies;
 	
 	public Integer getKey() {
@@ -47,11 +43,11 @@ public class Council extends Model implements BasicModel<Integer> {
 		this.key = key;
 	}
 	
-	public void setCityId(String cityId) {
+	public void setCityId(Integer cityId) {
 		this.cityId = cityId;
 	}
 	
-	public String getCityId() {
+	public Integer getCityId() {
 		return cityId;
 	}
 
