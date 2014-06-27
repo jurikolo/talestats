@@ -33,8 +33,9 @@ public class Global extends GlobalSettings {
 	@Override
 	public void onStart(Application app) {
 		// Magic goes here
-		FiniteDuration delay = FiniteDuration.create(0, TimeUnit.HOURS);
-		FiniteDuration frequency = FiniteDuration.create(1, TimeUnit.HOURS);
+		// Comment this part for tests execution
+		FiniteDuration delay = FiniteDuration.create(0, TimeUnit.MINUTES);
+		FiniteDuration frequency = FiniteDuration.create(1, TimeUnit.MINUTES);
 		Runnable showTime = cronProcess();
 
 		Akka.system()
