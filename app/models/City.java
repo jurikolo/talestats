@@ -4,7 +4,6 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.utils.dao.BasicModel;
 
@@ -16,11 +15,9 @@ public class City extends Model implements BasicModel<Integer> {
 	private Integer key;
 
 	@Basic
-	@Required
 	private String name;
 	
 	@Basic
-	@Required
 	private int size;
 
 	public Integer getKey() {
