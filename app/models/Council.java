@@ -10,10 +10,10 @@ import play.utils.dao.BasicModel;
 
 @Entity
 @SuppressWarnings("serial")
-public class Council extends Model implements BasicModel<Long> {
+public class Council extends Model implements BasicModel<Integer> {
 
 	@Id
-	private Long key;
+	private Integer key;
 
 	@Basic
 	@Required
@@ -39,11 +39,11 @@ public class Council extends Model implements BasicModel<Long> {
 	@Required
 	private Integer enemies;
 	
-	public Long getKey() {
+	public Integer getKey() {
 		return key;
 	}
 
-	public void setKey(Long key) {
+	public void setKey(Integer key) {
 		this.key = key;
 	}
 	
