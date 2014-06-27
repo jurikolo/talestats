@@ -18,17 +18,17 @@ public class CouncilController extends CRUDController<Integer, Council> {
 
 	@Override
 	protected String templateForList() {
-		return "cityList";
+		return "councilList";
 	}
 
 	@Override
 	protected String templateForForm() {
-		return "cityForm";
+		return "councilForm";
 	}
 
 	@Override
 	protected String templateForShow() {
-		return "cityShow";
+		return "councilShow";
 	}
 
 	@Override
