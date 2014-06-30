@@ -87,8 +87,20 @@ public class Global extends GlobalSettings {
 						for (Integer councilCnt = 1; councilCnt < councilExtract.getCount(doc); councilCnt++)
 						{
 							Integer councilId = councilExtract.getId(doc, councilCnt);
+							String councilName = councilExtract.getName(doc, councilCnt);
+							String councilRace = councilExtract.getRace(doc, councilCnt);
 							council.setKey(councilId);
 							council.setCityId(cityId);
+							council.setName(councilName);
+							council.setRace(councilRace);
+							//Mine saveOrUpdate does not work, use embedded remove + create instead
+							//TODO understand why not all records are saved to DB
+							try {
+								councilDao.remove(councilId);
+								councilDao.create(council);
+							} catch (Exception ex) {
+								
+							}
 						}
 					}
 					catch (IOException e) {

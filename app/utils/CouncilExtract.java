@@ -26,4 +26,13 @@ public class CouncilExtract {
 		str = str.substring(str.indexOf("<a href=\"#\">")+12, str.indexOf("<small>"));
 		return str;
 	}
+
+	public String getRace(Document doc, Integer cnt) {
+		Elements divs = doc.select("div.accordion-toggle");
+		Element div = divs.get(cnt);
+		String str = div.toString();
+		str = str.substring(str.indexOf("<small>")+7, str.indexOf("</small"));
+		str = str.substring(0, str.indexOf("-"));
+		return str;
+	}
 }

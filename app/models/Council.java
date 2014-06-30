@@ -104,6 +104,6 @@ public class Council extends Model implements BasicModel<Integer> {
 
 	@Override
 	public String toString() {
-		return "City [key=" + key + ", name=" + name + "]";
+		return "Council [key=" + key + ", name=" + name + "]";
 	}
 }
