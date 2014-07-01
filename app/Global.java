@@ -93,8 +93,10 @@ public class Global extends GlobalSettings {
 							council.setCityId(cityId);
 							council.setName(councilName);
 							council.setRace(councilRace);
-							//Mine saveOrUpdate does not work, use embedded remove + create instead
-							//TODO understand why not all records are saved to DB
+							//Play2 is dead at this point
+							//Not really sure whether eBean, Play2 or whatever else is guilty
+							//But I get OptimisticLock each time trying to set or update council object
+							//I give up and go for Spring + Vaadin.
 							try {
 								councilDao.remove(councilId);
 								councilDao.create(council);
